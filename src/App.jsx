@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Payment from "./components/Payment";
+import Payment from "./components/Payment"; // ⚠️ lazima ifanane na jina la file
 import API_URL from "./config";
 
 function App() {
@@ -9,27 +9,29 @@ function App() {
   useEffect(() => {
     // Access check
     fetch(`${API_URL}/access/user1`)
-      .then(res => res.json())
-      .then(data => setAccess(data))
+      .then((res) => res.json())
+      .then((data) => setAccess(data))
       .catch(() => setAccess({ access: "blocked" }));
 
     // Traffic stats
     fetch(`${API_URL}/stats`)
-      .then(res => res.json())
-      .then(data => setStats(data))
+      .then((res) => res.json())
+      .then((data) => setStats(data))
       .catch(() =>
         setStats({ cars: 0, buses: 0, trucks: 0, people: 0 })
       );
   }, []);
 
   return (
-    <div style={{
-      padding: "20px",
-      fontFamily: "Arial",
-      background: "#0f172a",
-      minHeight: "100vh",
-      color: "white"
-    }}>
+    <div
+      style={{
+        padding: "20px",
+        fontFamily: "Arial",
+        background: "#0f172a",
+        minHeight: "100vh",
+        color: "white",
+      }}
+    >
       <h1 style={{ textAlign: "center" }}>
         🚦 Traffic AI Dashboard
       </h1>
@@ -38,12 +40,14 @@ function App() {
       <Payment />
 
       {/* ACCESS STATUS */}
-      <div style={{
-        background: "#1e293b",
-        padding: "15px",
-        borderRadius: "10px",
-        marginBottom: "20px"
-      }}>
+      <div
+        style={{
+          background: "#1e293b",
+          padding: "15px",
+          borderRadius: "10px",
+          marginBottom: "20px",
+        }}
+      >
         <h3>🔐 System Status</h3>
 
         {access ? (
@@ -62,11 +66,13 @@ function App() {
       </div>
 
       {/* STATS */}
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(2, 1fr)",
-        gap: "15px"
-      }}>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)",
+          gap: "15px",
+        }}
+      >
         <div style={boxStyle}>
           <h3>🚗 Cars</h3>
           <p>{stats?.cars ?? 0}</p>
@@ -96,7 +102,7 @@ const boxStyle = {
   padding: "20px",
   borderRadius: "10px",
   textAlign: "center",
-  fontSize: "18px"
+  fontSize: "18px",
 };
 
 export default App;
