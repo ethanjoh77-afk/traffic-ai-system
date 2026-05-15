@@ -1,87 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  margin: 0;
-  background: #020617;
-  color: white;
-  font-family: Arial;
-}
-
-.container {
-  padding: 10px;
-}
-
-.header {
-  background: #0f172a;
-  padding: 15px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #1e293b;
-}
-
-.header h1 {
-  margin: 0;
-  color: #38bdf8;
-}
-
-.main-grid {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 10px;
-}
-
-.camera-section {
-  background: #0f172a;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-.camera-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-
-.camera {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 2px solid #1e293b;
-}
-
-.side-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.status-box {
-  background: #0f172a;
-  padding: 15px;
-  border-radius: 10px;
-}
-
-.online {
-  color: #22c55e;
-  font-weight: bold;
-}
-
-.stats {
-  display: grid;
-  gap: 10px;
-}
-
-.card {
-  background: #1e293b;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.card h3 {
-  margin: 0;
-}
-
-.card p {
-  font-size: 30px;
-  color: #38bdf8;
+  font-family: 'Inter', sans-serif;
+  background: #0B1120;
 }

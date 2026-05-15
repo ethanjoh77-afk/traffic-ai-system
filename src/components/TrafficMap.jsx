@@ -1,31 +1,17 @@
-import "leaflet/dist/leaflet.css";
-
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-} from "react-leaflet";
-
-const TrafficMap = () => {
+export default function TrafficMap() {
   return (
-    <div style={{ height: "500px", width: "100%" }}>
-      <MapContainer
-        center={[-6.7924, 39.2083]}
-        zoom={13}
-        style={{ height: "100%", width: "100%" }}
-      >
-        <TileLayer
-          attribution='&copy; OpenStreetMap contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+    <div className="bg-[#111827] border border-slate-800 rounded-2xl p-5 h-[420px]">
+      <div className="flex items-center justify-between mb-5">
+        <h2 className="text-xl font-bold">Traffic Map</h2>
 
-        <Marker position={[-6.7924, 39.2083]}>
-          <Popup>Dar es Salaam Traffic System</Popup>
-        </Marker>
-      </MapContainer>
+        <div className="text-green-400 text-sm">
+          ● Live Tracking Active
+        </div>
+      </div>
+
+      <div className="w-full h-[320px] rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center text-slate-500 border border-slate-700">
+        MAP VISUALIZATION AREA
+      </div>
     </div>
   );
-};
-
-export default TrafficMap;
+}

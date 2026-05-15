@@ -1,66 +1,49 @@
-import React from "react";
+import {
+  LayoutDashboard,
+  Camera,
+  Map,
+  Bell,
+  BrainCircuit,
+  Settings,
+} from "lucide-react";
 
-const Sidebar = () => {
+const menu = [
+  { icon: LayoutDashboard, label: "Dashboard" },
+  { icon: Camera, label: "Live Cameras" },
+  { icon: Map, label: "Traffic Map" },
+  { icon: Bell, label: "Alerts" },
+  { icon: BrainCircuit, label: "AI Insights" },
+  { icon: Settings, label: "Settings" },
+];
+
+export default function Sidebar() {
   return (
-    <div style={styles.sidebar}>
-      <h2 style={styles.logo}>🚦 Traffic AI</h2>
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-[#111827] border-r border-slate-800 p-5">
+      <div>
+        <h1 className="text-2xl font-bold text-cyan-400">
+          TRAFFIC AI
+        </h1>
 
-      <nav style={styles.nav}>
-        <button style={styles.btn}>Dashboard</button>
-        <button style={styles.btn}>Stats</button>
-        <button style={styles.btn}>Traffic Map</button>
-        <button style={styles.btn}>Live Cameras</button>
-        <button style={styles.btn}>AI Insights</button>
-        <button style={styles.btn}>System Alerts</button>
-      </nav>
-
-      <div style={styles.footer}>
-        <p style={styles.text}>v1.0.0</p>
+        <p className="text-slate-400 text-sm mt-1">
+          Smart Traffic Command Center
+        </p>
       </div>
-    </div>
+
+      <nav className="mt-10 space-y-3">
+        {menu.map((item, i) => {
+          const Icon = item.icon;
+
+          return (
+            <button
+              key={i}
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900 hover:bg-cyan-500/20 transition-all text-slate-300 hover:text-cyan-400"
+            >
+              <Icon size={20} />
+              <span>{item.label}</span>
+            </button>
+          );
+        })}
+      </nav>
+    </aside>
   );
-};
-
-const styles = {
-  sidebar: {
-    width: "220px",
-    height: "100vh",
-    backgroundColor: "#0f172a",
-    color: "white",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    padding: "20px",
-    position: "fixed",
-    left: 0,
-    top: 0,
-  },
-  logo: {
-    fontSize: "18px",
-    marginBottom: "20px",
-  },
-  nav: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-  },
-  btn: {
-    background: "transparent",
-    color: "white",
-    border: "1px solid #334155",
-    padding: "10px",
-    cursor: "pointer",
-    textAlign: "left",
-    borderRadius: "6px",
-  },
-  footer: {
-    marginTop: "20px",
-    fontSize: "12px",
-    opacity: 0.6,
-  },
-  text: {
-    margin: 0,
-  },
-};
-
-export default Sidebar;
+}
