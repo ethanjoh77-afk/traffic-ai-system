@@ -8,7 +8,7 @@ const Payment = () => {
   const pay = async () => {
     try {
       setLoading(true);
-      setMsg("");
+      setMsg("Processing payment...");
 
       const res = await fetch(`${API_URL}/pay/mock`, {
         method: "POST",
@@ -18,12 +18,17 @@ const Payment = () => {
         body: JSON.stringify({ user_id: "user1" }),
       });
 
+      // safety check
+      if (!res.ok) {
+        throw new Error("Server responded with error");
+      }
+
       const data = await res.json();
 
       setMsg(data.message || "Payment successful");
     } catch (err) {
-      console.error(err);
-      setMsg("Payment failed");
+      console.error("Payment error:", err);
+      setMsg("Payment failed — check backend/API");
     } finally {
       setLoading(false);
     }

@@ -1,108 +1,89 @@
-import { useEffect, useState } from "react";
-import Payment from "./components/Payment"; // ⚠️ lazima ifanane na jina la file
-import API_URL from "./config";
+import React, { useState } from "react";
+
+import Sidebar from "./components/Sidebar";
+import StatsCards from "./components/StatsCards";
+import TrafficMap from "./components/TrafficMap";
+import LiveCameras from "./components/LiveCameras";
+import AIInsights from "./components/AIInsights";
+import SystemAlerts from "./components/SystemAlerts";
 
 function App() {
-  const [stats, setStats] = useState(null);
-  const [access, setAccess] = useState(null);
-
-  useEffect(() => {
-    // Access check
-    fetch(`${API_URL}/access/user1`)
-      .then((res) => res.json())
-      .then((data) => setAccess(data))
-      .catch(() => setAccess({ access: "blocked" }));
-
-    // Traffic stats
-    fetch(`${API_URL}/stats`)
-      .then((res) => res.json())
-      .then((data) => setStats(data))
-      .catch(() =>
-        setStats({ cars: 0, buses: 0, trucks: 0, people: 0 })
-      );
-  }, []);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <div
-      style={{
-        padding: "20px",
-        fontFamily: "Arial",
-        background: "#0f172a",
-        minHeight: "100vh",
-        color: "white",
-      }}
-    >
-      <h1 style={{ textAlign: "center" }}>
-        🚦 Traffic AI Dashboard
-      </h1>
+    <div className="flex bg-slate-950 text-white min-h-screen">
 
-      {/* PAYMENT */}
-      <Payment />
+      {/* SIDEBAR */}
+      {sidebarOpen && <Sidebar />}
 
-      {/* ACCESS STATUS */}
-      <div
-        style={{
-          background: "#1e293b",
-          padding: "15px",
-          borderRadius: "10px",
-          marginBottom: "20px",
-        }}
-      >
-        <h3>🔐 System Status</h3>
+      {/* MAIN CONTENT */}
+      <div className="flex-1 p-6 space-y-6">
 
-        {access ? (
-          access.access === "blocked" ? (
-            <p style={{ color: "red" }}>
-              ❌ Access Blocked (Pay Required)
+        {/* TOP BAR */}
+        <div className="flex items-center justify-between bg-slate-900 p-5 rounded-2xl border border-slate-800">
+
+          <div>
+            <h1 className="text-4xl font-bold text-cyan-400">
+              🚦 SMART TRAFFIC AI
+            </h1>
+
+            <p className="text-slate-400 mt-2">
+              Real-Time Government Monitoring System
             </p>
-          ) : (
-            <p style={{ color: "green" }}>
-              ✅ Access Granted
-            </p>
-          )
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
+          </div>
 
-      {/* STATS */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
-          gap: "15px",
-        }}
-      >
-        <div style={boxStyle}>
-          <h3>🚗 Cars</h3>
-          <p>{stats?.cars ?? 0}</p>
+          <button
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+            className="bg-cyan-500 hover:bg-cyan-600 px-4 py-2 rounded-xl font-bold"
+          >
+            ☰
+          </button>
         </div>
 
-        <div style={boxStyle}>
-          <h3>🚌 Buses</h3>
-          <p>{stats?.buses ?? 0}</p>
+        {/* SYSTEM STATUS */}
+        <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5">
+          <h2 className="text-2xl font-bold text-green-400">
+            🟢 SYSTEM ONLINE
+          </h2>
+
+          <p className="text-slate-400 mt-2">
+            All monitoring systems operational.
+          </p>
         </div>
 
-        <div style={boxStyle}>
-          <h3>🚚 Trucks</h3>
-          <p>{stats?.trucks ?? 0}</p>
+        {/* STATS */}
+        <StatsCards />
+
+        {/* MAP + ALERTS */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+          {/* MAP */}
+          <div className="xl:col-span-2 bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <TrafficMap />
+          </div>
+
+          {/* ALERTS */}
+          <SystemAlerts />
         </div>
 
-        <div style={boxStyle}>
-          <h3>🚶 People</h3>
-          <p>{stats?.people ?? 0}</p>
+        {/* CAMERAS + AI */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+          {/* LIVE CAMERAS */}
+          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4">
+            <h2 className="text-2xl font-bold mb-4 text-cyan-400">
+              📹 LIVE CAMERAS
+            </h2>
+
+            <LiveCameras />
+          </div>
+
+          {/* AI INSIGHTS */}
+          <AIInsights />
         </div>
       </div>
     </div>
   );
 }
-
-const boxStyle = {
-  background: "#334155",
-  padding: "20px",
-  borderRadius: "10px",
-  textAlign: "center",
-  fontSize: "18px",
-};
 
 export default App;
