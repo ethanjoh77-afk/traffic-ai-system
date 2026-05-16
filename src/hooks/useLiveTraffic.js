@@ -11,7 +11,9 @@ export default function useLiveTraffic() {
 
   useEffect(() => {
 
-    const ws = new WebSocket("ws://127.0.0.1:8000/ws");
+    const ws = new WebSocket(
+  "wss://YOUR-BACKEND.up.railway.app/ws"
+);
 
     ws.onmessage = (event) => {
       const data = JSON.parse(event.data);
