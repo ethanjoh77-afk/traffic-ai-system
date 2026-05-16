@@ -7,17 +7,19 @@ import AIInsights from "./components/AIInsights";
 import TrafficSimulation from "./components/TrafficSimulation";
 import SystemAlerts from "./components/SystemAlerts";
 
-import useTrafficStream from "./hooks/useTrafficStream";
+import useLiveTraffic from "./hooks/useLiveTraffic";
 
 export default function App() {
-  // 🔵 LIVE DATA HOOK (HAPA NDANI YA COMPONENT)
-  const stream = useTrafficStream();
+  // 🔴 LIVE DATA HOOK (backend WebSocket)
+  const stream = useLiveTraffic();
 
   return (
     <div className="min-h-screen bg-[#030B1A] text-white flex overflow-hidden">
 
+      {/* SIDEBAR */}
       <Sidebar />
 
+      {/* MAIN AREA */}
       <main className="flex-1 ml-[260px] overflow-y-auto min-h-screen">
 
         <Topbar />
@@ -26,57 +28,60 @@ export default function App() {
 
           <StatsCards />
 
-          {/* 🔥 LIVE STATUS PANEL (HII NDIYO ULIKUWA UNATAKA) */}
-          <div className="bg-[#071426] border border-slate-800 rounded-3xl p-5">
-            
-            <h2 className="text-xl font-bold mb-4">
-              LIVE TRAFFIC STREAM
+          {/* 🔥 LIVE OPS PANEL */}
+          <div className="bg-[#071426] border border-slate-800 rounded-2xl p-5">
+
+            <h2 className="text-cyan-400 font-bold mb-4 text-lg">
+              LIVE TRAFFIC OPS CENTER
             </h2>
 
-            <div className="text-white p-4 space-y-2">
+            {/* VEHICLES */}
+            <p className="text-white text-base mb-2">
+              🚗 Vehicles:{" "}
+              <span className="text-cyan-400 font-bold">
+                {stream.vehicles}
+              </span>
+            </p>
 
-              <h2 className="text-lg">
-                🚗 Live Vehicles:{" "}
-                <span className="text-cyan-400 font-bold">
-                  {stream.vehicles}
-                </span>
-              </h2>
+            {/* CONGESTION */}
+            <p className="text-white text-base mb-2">
+              Status:{" "}
+              <span
+                className={
+                  stream.congestion === "red"
+                    ? "text-red-500 font-bold"
+                    : stream.congestion === "yellow"
+                    ? "text-yellow-400 font-bold"
+                    : "text-green-400 font-bold"
+                }
+              >
+                {stream.congestion.toUpperCase()}
+              </span>
+            </p>
 
-              <h3 className="text-lg">
-                Congestion:{" "}
-                <span
-                  className={
-                    stream.congestion === "red"
-                      ? "text-red-500"
-                      : stream.congestion === "yellow"
-                      ? "text-yellow-400"
-                      : "text-green-400"
-                  }
-                >
-                  {stream.congestion.toUpperCase()}
-                </span>
-              </h3>
+            {/* ACCIDENT ALERT */}
+            {stream.accident && (
+              <p className="text-red-500 font-bold animate-pulse">
+                🚨 ACCIDENT DETECTED
+              </p>
+            )}
 
-              {stream.incidents.length > 0 && (
-                <div className="text-red-500 font-bold animate-pulse">
-                  🚨 Accident Detected
-                </div>
-              )}
-
-            </div>
           </div>
 
-          {/* MAP / SIMULATION */}
+          {/* DASHBOARD GRID */}
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-6">
 
+            {/* AI INSIGHTS */}
             <div className="xl:col-span-3">
               <AIInsights />
             </div>
 
+            {/* MAP / SIMULATION */}
             <div className="xl:col-span-6">
               <TrafficSimulation />
             </div>
 
+            {/* ALERTS */}
             <div className="xl:col-span-3">
               <SystemAlerts />
             </div>
