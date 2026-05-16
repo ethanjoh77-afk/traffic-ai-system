@@ -1,6 +1,7 @@
 import "./App.css";
 import { motion } from "framer-motion";
 
+import TrafficSimulation from "./components/TrafficSimulation";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import StatsCards from "./components/StatsCards";
