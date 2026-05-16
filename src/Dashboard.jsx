@@ -1,8 +1,9 @@
 import './App.css'
+
 import Sidebar from './components/Sidebar'
 import Topbar from './components/Topbar'
 import StatsCards from './components/StatsCards'
-import AIInsights from './AIInsights'
+import AIInsights from './components/AIInsights'
 import TrafficMap from './components/TrafficMap'
 import LiveCameras from './components/LiveCameras'
 import SystemAlerts from './components/SystemAlerts'
@@ -10,9 +11,11 @@ import SystemAlerts from './components/SystemAlerts'
 export default function Dashboard() {
   return (
     <div className="dashboard">
+
       <Sidebar />
 
       <main className="main-content">
+
         <Topbar />
 
         <StatsCards />
@@ -24,7 +27,9 @@ export default function Dashboard() {
         </div>
 
         <SystemAlerts />
+
       </main>
+
     </div>
   )
 }
