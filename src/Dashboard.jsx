@@ -1,5 +1,4 @@
 import './App.css'
-
 import Sidebar from './components/Sidebar'
 import Topbar from './components/Topbar'
 import StatsCards from './components/StatsCards'
@@ -11,38 +10,21 @@ import SystemAlerts from './components/SystemAlerts'
 export default function Dashboard() {
   return (
     <div className="dashboard">
-
-      {/* SIDEBAR */}
       <Sidebar />
 
-      {/* MAIN */}
       <main className="main-content">
-
-        {/* TOPBAR */}
         <Topbar />
 
-        {/* STATS */}
         <StatsCards />
 
-        {/* CENTER CONTENT */}
         <div className="middle-grid">
-
-          {/* AI INSIGHTS */}
           <AIInsights />
-
-          {/* TRAFFIC MAP */}
           <TrafficMap />
-
-          {/* LIVE CAMERAS */}
           <LiveCameras />
-
         </div>
 
-        {/* ALERTS */}
         <SystemAlerts />
-
       </main>
-
     </div>
   )
 }
