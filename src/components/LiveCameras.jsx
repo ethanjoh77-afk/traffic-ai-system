@@ -2,10 +2,13 @@ export default function LiveCameras() {
   return (
     <div className="bg-[#111827] border border-slate-800 rounded-2xl p-5">
       <div className="flex items-center justify-between mb-5">
-        <h2 className="text-xl font-bold">Live Camera Feeds</h2>
+        <h2 className="text-xl font-bold">
+          Live Camera Feeds
+        </h2>
 
         <div className="flex items-center gap-2 text-red-400 text-sm">
           <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+
           LIVE MONITORING
         </div>
       </div>
@@ -34,4 +37,6 @@ export default function LiveCameras() {
           </div>
         ))}
       </div>
+    </div>
+  );
 }
