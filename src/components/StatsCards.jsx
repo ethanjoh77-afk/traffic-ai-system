@@ -16,8 +16,8 @@ const stats = [
   },
   {
     title: "AVERAGE SPEED",
-    value: "34",
-    sub: "City Average",
+    value: "34 km/h",
+    sub: "City Avg",
     growth: "+5.3%",
     icon: Gauge,
     color: "bg-green-600",
@@ -45,21 +45,18 @@ export default function StatsCards() {
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
       {stats.map((item, i) => {
-
         const Icon = item.icon;
 
         return (
           <div
             key={i}
-            className="bg-[#071426] border border-slate-800 rounded-3xl p-6"
+            className="bg-[#071426]/80 backdrop-blur-xl border border-slate-800/50 rounded-3xl p-6 shadow-lg hover:scale-[1.02] transition-all duration-300"
           >
 
             <div className="flex items-center gap-5">
 
-              <div className={`${item.color} w-20 h-20 rounded-full flex items-center justify-center`}>
-
-                <Icon size={34} />
-
+              <div className={`${item.color} w-20 h-20 rounded-2xl flex items-center justify-center shadow-lg`}>
+                <Icon size={32} />
               </div>
 
               <div>
@@ -68,7 +65,7 @@ export default function StatsCards() {
                   {item.title}
                 </p>
 
-                <h2 className="text-4xl font-bold mt-2">
+                <h2 className="text-3xl font-bold mt-2">
                   {item.value}
                 </h2>
 

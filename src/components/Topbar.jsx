@@ -2,17 +2,17 @@ import { Bell, CloudSun } from "lucide-react";
 
 export default function Topbar() {
   return (
-    <header className="h-[88px] border-b border-slate-800 bg-[#040D1C] flex items-center justify-between px-8">
+    <header className="h-[88px] border-b border-slate-800/50 bg-[#040D1C]/80 backdrop-blur-xl flex items-center justify-between px-8">
 
       <div className="flex items-center gap-10">
 
         <div className="text-slate-300">
-          May 27, 2024 | 10:24:36 AM
+          May 16, 2026 | 10:24 AM
         </div>
 
         <div className="flex items-center gap-3 text-green-400">
 
-          <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400 shadow-[0_0_10px_#22c55e] animate-pulse"></div>
 
           <span>System Online</span>
 

@@ -26,16 +26,15 @@ const items = [
 
 export default function Sidebar() {
   return (
-    <aside className="fixed left-0 top-0 w-[260px] h-screen bg-[#050F1F] border-r border-slate-800 flex flex-col">
+    <aside className="fixed left-0 top-0 w-[260px] h-screen bg-[#050F1F]/95 backdrop-blur-xl border-r border-slate-800/50 flex flex-col shadow-2xl">
 
-      <div className="h-[88px] border-b border-slate-800 px-5 flex items-center">
+      <div className="h-[88px] border-b border-slate-800/50 px-5 flex items-center">
         <div>
-          <h1 className="text-2xl font-extrabold">
+          <h1 className="text-2xl font-extrabold tracking-wide">
             TANZANIA TRAFFIC
           </h1>
-
-          <p className="text-cyan-400 font-bold mt-1">
-            AI SYSTEM
+          <p className="text-cyan-400 font-bold text-sm">
+            AI CONTROL SYSTEM
           </p>
         </div>
       </div>
@@ -47,25 +46,21 @@ export default function Sidebar() {
       <nav className="px-4 flex-1 space-y-2">
 
         {items.map((item, i) => {
-
           const Icon = item.icon;
 
           return (
             <button
               key={i}
-              className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl ${
+              className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl transition-all duration-200 hover:translate-x-1 ${
                 i === 0
                   ? "bg-blue-600 text-white"
-                  : "text-slate-300 hover:bg-slate-800"
+                  : "text-slate-300 hover:bg-slate-800/50"
               }`}
             >
-
               <Icon size={18} />
-
               <span className="text-sm font-medium">
                 {item.label}
               </span>
-
             </button>
           );
         })}

@@ -11,11 +11,11 @@ import SystemAlerts from "./components/SystemAlerts";
 export default function App() {
   return (
     <div className="min-h-screen bg-[#030B1A] text-white flex overflow-hidden">
-      
+
       <Sidebar />
 
       <main className="flex-1 ml-[260px] overflow-y-auto min-h-screen">
-        
+
         <Topbar />
 
         <div className="p-6 space-y-6">
