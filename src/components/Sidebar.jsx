@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
   LayoutDashboard,
   Map,
@@ -30,12 +31,8 @@ export default function Sidebar() {
 
       <div className="h-[88px] border-b border-slate-800/50 px-5 flex items-center">
         <div>
-          <h1 className="text-2xl font-extrabold tracking-wide">
-            TANZANIA TRAFFIC
-          </h1>
-          <p className="text-cyan-400 font-bold text-sm">
-            AI CONTROL SYSTEM
-          </p>
+          <h1 className="text-2xl font-extrabold">TANZANIA TRAFFIC</h1>
+          <p className="text-cyan-400 text-sm font-bold">AI CONTROL SYSTEM</p>
         </div>
       </div>
 
@@ -49,19 +46,19 @@ export default function Sidebar() {
           const Icon = item.icon;
 
           return (
-            <button
+            <motion.button
               key={i}
-              className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl transition-all duration-200 hover:translate-x-1 ${
+              whileHover={{ x: 6, scale: 1.02 }}
+              whileTap={{ scale: 0.97 }}
+              className={`w-full flex items-center gap-4 px-4 py-4 rounded-2xl ${
                 i === 0
-                  ? "bg-blue-600 text-white"
+                  ? "bg-blue-600 text-white shadow-lg"
                   : "text-slate-300 hover:bg-slate-800/50"
               }`}
             >
               <Icon size={18} />
-              <span className="text-sm font-medium">
-                {item.label}
-              </span>
-            </button>
+              {item.label}
+            </motion.button>
           );
         })}
 

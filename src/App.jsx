@@ -1,4 +1,5 @@
 import "./App.css";
+import { motion } from "framer-motion";
 
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
@@ -18,7 +19,12 @@ export default function App() {
 
         <Topbar />
 
-        <div className="p-6 space-y-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="p-6 space-y-6"
+        >
 
           <StatsCards />
 
@@ -40,7 +46,7 @@ export default function App() {
 
           <SystemAlerts />
 
-        </div>
+        </motion.div>
 
       </main>
 
