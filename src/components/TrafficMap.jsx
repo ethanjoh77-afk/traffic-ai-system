@@ -1,4 +1,4 @@
-export default function TrafficMap() {
+export default function TrafficSimulation() {
   return (
     <div className="bg-[#071426]/80 border border-slate-800/50 rounded-3xl p-5">
 

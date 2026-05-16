@@ -6,7 +6,6 @@ import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 import StatsCards from "./components/StatsCards";
 import AIInsights from "./components/AIInsights";
-import TrafficMap from "./components/TrafficMap";
 import LiveCameras from "./components/LiveCameras";
 import SystemAlerts from "./components/SystemAlerts";
 
@@ -36,7 +35,7 @@ export default function App() {
             </div>
 
             <div className="xl:col-span-6">
-              <TrafficMap />
+              <TrafficSimulation />
             </div>
 
             <div className="xl:col-span-3">
