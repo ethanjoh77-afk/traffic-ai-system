@@ -4,9 +4,6 @@ import random
 
 app = FastAPI()
 
-# =========================
-# MOCK DATA
-# =========================
 CAMERAS = [
     "ubungo",
     "kariakoo",
@@ -14,9 +11,6 @@ CAMERAS = [
 ]
 
 
-# =========================
-# HOME ROUTE
-# =========================
 @app.get("/")
 def home():
     return {
@@ -25,48 +19,43 @@ def home():
     }
 
 
-# =========================
-# HEALTH CHECK
-# =========================
 @app.get("/health")
 def health():
-    return {
-        "ok": True
-    }
+    return {"ok": True}
 
 
-# =========================
-# WEBSOCKET
-# =========================
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
 
-    while True:
+    try:
+        while True:
 
-        fusion = {}
-        total_vehicles = 0
+            fusion = {}
+            total_vehicles = 0
 
-        # generate fake traffic data
-        for cam in CAMERAS:
-            count = random.randint(1, 15)
+            for cam in CAMERAS:
+                count = random.randint(1, 15)
+                fusion[cam] = count
+                total_vehicles += count
 
-            fusion[cam] = count
-            total_vehicles += count
+            congestion = (
+                "red" if total_vehicles > 25 else
+                "yellow" if total_vehicles > 12 else
+                "green"
+            )
 
-        congestion = (
-            "red" if total_vehicles > 25 else
-            "yellow" if total_vehicles > 12 else
-            "green"
-        )
+            accident = total_vehicles > 30
 
-        accident = total_vehicles > 30
+            await websocket.send_json({
+                "zones": fusion,
+                "vehicles": total_vehicles,
+                "congestion": congestion,
+                "accident": accident
+            })
 
-        await websocket.send_json({
-            "zones": fusion,
-            "vehicles": total_vehicles,
-            "congestion": congestion,
-            "accident": accident
-        })
+            await asyncio.sleep(1)
 
-        await asyncio.sleep(1)
+    except Exception:
+        # prevents crash on disconnect
+        pass
