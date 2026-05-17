@@ -7,22 +7,39 @@ export default function TrafficMap() {
   const cars = simulateVehicles(stream);
 
   return (
-    <MapContainer center={[-6.8,39.2]} zoom={12} style={{height:"500px"}}>
+    <div className="rounded-3xl overflow-hidden border border-slate-800/50 shadow-2xl">
 
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+      <MapContainer
+        center={[-6.8, 39.2]}
+        zoom={12}
+        scrollWheelZoom={true}
+        style={{
+          height: "650px",
+          width: "100%",
+        }}
+      >
 
-      {cars.map((c,i)=>(
-        <CircleMarker
-          key={i}
-          center={[c.lat,c.lng]}
-          radius={6 + c.intensity}
-          pathOptions={{
-            color: stream.congestion,
-            fillOpacity: 0.6
-          }}
+        <TileLayer
+          attribution='&copy; OpenStreetMap contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-      ))}
 
-    </MapContainer>
+        {cars.map((c, i) => (
+          <CircleMarker
+            key={i}
+            center={[c.lat, c.lng]}
+            radius={6 + c.intensity}
+            pathOptions={{
+              color: stream.congestion,
+              fillColor: stream.congestion,
+              fillOpacity: 0.7,
+              weight: 2,
+            }}
+          />
+        ))}
+
+      </MapContainer>
+
+    </div>
   );
 }
