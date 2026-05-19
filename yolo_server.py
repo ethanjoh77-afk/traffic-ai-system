@@ -6,7 +6,7 @@ import cv2
 import time
 
 # =========================================
-# APP CONFIG
+# APP
 # =========================================
 
 app = Flask(__name__)
@@ -17,26 +17,26 @@ socketio = SocketIO(
 )
 
 # =========================================
-# LOAD YOLO MODEL
+# YOLO MODEL
 # =========================================
 
 model = YOLO("yolov8n.pt")
 
 # =========================================
-# CAMERA SETUP
+# CAMERA
 # =========================================
 
 camera = cv2.VideoCapture(0)
 
-# CAMERA CHECK
 if not camera.isOpened():
-    print("❌ ERROR: Camera not detected")
+
+    print("❌ Camera not detected")
     exit()
 
-print("✅ Camera connected successfully")
+print("✅ Camera connected")
 
 # =========================================
-# FRAME GENERATOR
+# GENERATE FRAMES
 # =========================================
 
 def generate_frames():
@@ -46,24 +46,13 @@ def generate_frames():
         success, frame = camera.read()
 
         if not success:
-            print("❌ Failed to read frame")
             break
 
-        # OPTIONAL ROTATION
-        # frame = cv2.rotate(
-        #     frame,
-        #     cv2.ROTATE_90_COUNTERCLOCKWISE
-        # )
-
-        # =========================================
+        # =====================================
         # YOLO DETECTION
-        # =========================================
+        # =====================================
 
-        results = model(frame)
-
-        # =========================================
-        # COUNTERS
-        # =========================================
+        results = model(frame, conf=0.4)
 
         car_count = 0
         truck_count = 0
@@ -90,9 +79,9 @@ def generate_frames():
             bus_count
         )
 
-        # =========================================
-        # SEND LIVE SOCKET DATA
-        # =========================================
+        # =====================================
+        # SOCKET LIVE DATA
+        # =====================================
 
         socketio.emit(
             "live-stats",
@@ -110,31 +99,27 @@ def generate_frames():
             }
         )
 
-        # =========================================
-        # DRAW YOLO BOXES
-        # =========================================
+        # =====================================
+        # DRAW BOXES
+        # =====================================
 
         annotated_frame = results[0].plot()
 
-        # =========================================
+        # =====================================
         # ENCODE FRAME
-        # =========================================
+        # =====================================
 
         ret, buffer = cv2.imencode(
             ".jpg",
             annotated_frame
         )
 
-        frame_bytes = buffer.tobytes()
-
-        # =========================================
-        # VIDEO STREAM
-        # =========================================
+        frame = buffer.tobytes()
 
         yield (
             b'--frame\r\n'
             b'Content-Type: image/jpeg\r\n\r\n' +
-            frame_bytes +
+            frame +
             b'\r\n'
         )
 
@@ -148,7 +133,7 @@ def generate_frames():
 
 def home():
 
-    return "✅ YOLO AI SERVER RUNNING"
+    return "YOLO AI SERVER RUNNING"
 
 @app.route("/video_feed")
 
@@ -156,7 +141,7 @@ def video_feed():
 
     return Response(
         generate_frames(),
-        mimetype="multipart/x-mixed-replace; boundary=frame"
+        mimetype='multipart/x-mixed-replace; boundary=frame'
     )
 
 # =========================================
@@ -165,7 +150,7 @@ def video_feed():
 
 if __name__ == "__main__":
 
-    print("🚀 Starting YOLO AI Server...")
+    print("🚀 Starting YOLO AI Server")
 
     socketio.run(
         app,
